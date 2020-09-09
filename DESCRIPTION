@@ -1,5 +1,5 @@
 Package: BayesianPain
-Title: Evaluates Bayesian Models of Pain Expectations
+Title: Evaluates Bayesian Models of Pain Expectation
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Daniel",
@@ -7,22 +7,28 @@ Authors@R:
            role = c("aut", "cre"),
            email = "dacostak@ucsd.edu",
            comment = structure("YOUR-ORCID-ID", .Names = "ORCID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+Description: Evaluates and compares a set of bayesian models of pain 
+    expection.
+License: `use_gpl3_license()` 
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.0
+RoxygenNote: 7.1.1
 Biarch: true
 Depends: 
     R (>= 3.4.0)
-Imports: 
+Imports:
+    ggplot2 (>= 3.3.2),
+    knitr (>= 1.29),
+    loo (>= 2.3.1),
     methods,
     Rcpp (>= 0.12.0),
     RcppParallel (>= 5.0.1),
+    reshape2 (>= 1.4.4),
     rstan (>= 2.18.1),
-    rstantools (>= 2.1.1)
+    rstantools (>= 2.1.1),
+    stats4 (>= 3.4.4),
+    viridis (>= 0.5.1)
 LinkingTo: 
     BH (>= 1.66.0),
     Rcpp (>= 0.12.0),
