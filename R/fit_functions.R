@@ -58,3 +58,4 @@ fit_models <- function(models, stan_data, iter=300, chains=3){
 
   return(list("fits" = fits, "DICs" = DICs))
 }
+

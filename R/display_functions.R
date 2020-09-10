@@ -1,0 +1,19 @@
+#' Display Model Parameters
+#'
+#' @param stanfit
+#' @return none
+#'
+#'@export
+get_parameters <- function(stanfits){
+  for (i_m in 1:length(stanfits)){
+    if (!is.null(stanfits[[i_m]])){
+      fit <- stanfits[[i_m]]
+      model_name <- fit@model_name
+      model_params <- fit@model_pars[1:5]
+      param_df <- rstan::summary(fit, pars = model_params)$summary[,c("mean", "se_mean")]
+      print(model_name)
+      print(param_df)
+    }
+  }
+}
+
