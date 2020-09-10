@@ -6,6 +6,7 @@
 #' @param model_numbers array of numbers corresponding to the desired models
 #' @return an array of stan model objects corresponding to select models
 #'
+#' @export
 get_models <- function(model_numbers){
 
   models <- vector("list", length(model_numbers))
@@ -32,6 +33,7 @@ get_models <- function(model_numbers){
 #' @param model_numbers array of numbers corresponding to the desired models
 #' @return an array of stan model objects corresponding to select models
 #'
+#'@export
 fit_models <- function(models, stan_data, iter=300, chains=3){
 
   fits <- vector("list", length(models))

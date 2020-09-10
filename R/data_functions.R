@@ -4,6 +4,8 @@
 #' S: subject id, Q: mean of presented que,
 #' Std: standard deviation of presented que, X: administered stimulus, R: subject rating
 #' @return dataframe object from \code{exp_data} with subject ratings that are centered and scaled
+#'
+#' @export
 center_scale <- function(exp_data){
 
   clean_data = data.frame()
@@ -28,6 +30,8 @@ center_scale <- function(exp_data){
 #' S: subject id, Q: mean of presented que,
 #' Std: standard deviation of presented que, X: administered stimulus, R: subject rating
 #' @return data to fit stan model
+#'
+#' @export
 create_stan_data <- function(exp_data){
 
   stan_data <- list(N = length(exp_data$Q), subject= exp_data$S, q = exp_data$Q, std = exp_data$Std, X = exp_data$X, r = exp_data$R,

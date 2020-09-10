@@ -6,6 +6,7 @@
 #' @param stan_fit stan fit object with \code{log_lik_t} field
 #' @return DIC value
 #'
+#' @export
 calc_DIC <- function(stan_fit){
 
   MCMC_LL_mean <- mean(rstan::extract(stan_fit, 'log_lik_t')$log_lik_t)
@@ -67,6 +68,7 @@ integrate_log_lik <- function(stan_fit){
 #' @param stan_fit with \code{log_lik_t} field
 #' @return DIC value
 #'
+#' @export
 calc_DIC_hierarchical <- function(stan_fit, stan_mle, run_data){
 
   run_data_mle <- add_mle_param(stan_fit, run_data)
