@@ -46,7 +46,7 @@ fit_models <- function(models, stan_data, iter=300, chains=3){
 
     if(substring(m, nchar(m)-7) == 'var.stan'){
 
-      model_mle <- paste0(substring(model_list[1], 1 ,nchar(model_list[1])-6),
+      model_mle <- paste0(substring(m, 1 ,nchar(m)-5),
                           "_mle.stan")
 
       DICs[m] <- BayesianPain::calc_DIC_hierarchical(fits[[m]], model_mle, stan_data)
