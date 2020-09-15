@@ -1,14 +1,12 @@
-// Model 2 - Multimodal prior model
+// 
+// Model 3 - Mean-only Bayesian model
 //
 // ---------------------------------------------------------------------------------------------------------------
 //
-// Pain experience depends not only on the pain stimulation, but also on the information in the cue, 
-// where that information is represented as a multi-modal ‘prior’ distribution.
-// The distribution consists of a weighted average of normal distributions, modulated by the parameter . The
-// normals are centered at each possible magnitude (v_1ij … v_mij) of the incoming pain stimulus and are weighted by
-// their corresponding probabilities of occurrence, (w_1ij … w_mij).
+// Pain experience depends not only on the pain stimulation, but also on the mean of the cue, q_ij, 
+// modulated by the parameter rho. This model does not incorporate the effects of uncertainty. 
 // 
-// P(R|X,Z) ~ Noraml(X, beta) * SUM [ w_kij * Normal(v_kij, rho)
+// P(R|X,Z) ~ Noraml(X, beta) * Normal(q, rho)
 // 
 // ---------------------------------------------------------------------------------------------------------------
 
@@ -32,8 +30,6 @@ data {
   int<lower=0> N;
   int subject[N];                   //Subject ID
   vector[N] q;                      //Mean of Presented Que
-  matrix[N, 4] v;                   //Presented Magnitudes
-  matrix[N, 4] w;                   //Magnitude Weights
   vector[N] std;                    //Standard Deviation of Presented Que
   vector[N] X;                      //Administerd Stimulus
   vector<lower=0, upper=100>[N] r;  //Subject Rating
@@ -76,44 +72,9 @@ model {
   //beta ~ cauchy(0,100);
   //rho ~ cauchy(0,100);
   
-  //r ~ normal(X, beta_n);
-  //r ~ normal(q, rho_n);
-  
-  for (n in 1:N){
-    
-    real m = 0.0;
-    real prob = 0.0;
-    real prior = 0.0;
-    real prob_integral = 0.0;
-    real prior_integral = 0.0;
-    
-    for (i in 1:4){
-      m = m + v[n,i]*w[n,i];
-    }
-    
-    //Calculate Normalization Constant
-    for (theta_i in 1:100){
-      prior_integral = 0.0;
-      for (i in 1:4){
-        prior_integral = prior_integral + w[n,i] * exp(normal_lpdf(theta_i | v[n,i], rho_n[n]));
-      }
-      prob_integral = prob_integral + exp(normal_lpdf(theta_i | X[n], beta_n[n])) * prior_integral;
-    }
-    
-    prior = 0;
-    for (i in 1:4){
-      prior = prior + w[n,i] * exp(normal_lpdf(r[n] | v[n,i], rho_n[n]));
-    }
-    
-    prob = exp(normal_lpdf(r[n] | X[n], beta_n[n])) * prior;
-    prob = prob / prob_integral;
-    
-    target += log(prob);
-  } 
-  
+  r ~ normal(mean_p, std_p);
 
 }
-
 generated quantities {
   real log_lik_t;         //Log Likelihood of the experiment with given parameters 
   vector[S] log_lik_s;    //Log Likelihood of each subject
@@ -125,31 +86,11 @@ generated quantities {
   
   for (n in 1:N){
     int s = subject[n];
-    real prob = 0.0;
-    real prior = 0.0;
-    real prob_integral = 0.0;
-    real prior_integral = 0.0;
 
-    //Calculate Normalization Constant
-    for (theta_i in 1:100){
-      prior_integral = 0.0;
-      for (i in 1:4){
-        prior_integral = prior_integral + w[n,i] * exp(normal_lpdf(theta_i | v[n,i], rho_n[n]));
-      }
-      prob_integral = prob_integral + exp(normal_lpdf(theta_i | X[n], beta_n[n])) * prior_integral;
-    }
-    
-    prior = 0.0;
-    for (i in 1:4){
-      prior = prior + w[n,i] * exp(normal_lpdf(r[n] | v[n,i], rho_n[n]));
-    }
-    
-    prob = exp(normal_lpdf(r[n] | X[n], beta_n[n])) * prior;
-    prob = prob / prob_integral;
-    
-    log_lik[n] = log(prob);
+    log_lik[n] = normal_lpdf(r[n] | mean_p[n], std_p[n]);
     log_lik_s[s] = log_lik_s[s] + log_lik[n];
     log_lik_t = log_lik_t + log_lik[n];
   }  
   }
 }
+

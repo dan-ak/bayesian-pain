@@ -11,7 +11,7 @@ get_models <- function(model_numbers){
 
   models <- vector("list", length(model_numbers))
 
-  model_names <- c("1_b", "2_br", "3_br", "4_bre", "5_bremn", "6_bremn_var")
+  model_names <- c("1_b", "2_br", "3_bre", "4_bremn", "5_bremn_var")
 
   i <- 0
   for(m in model_numbers){

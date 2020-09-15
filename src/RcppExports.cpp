@@ -10,21 +10,19 @@ using namespace Rcpp;
 RcppExport SEXP _rcpp_module_boot_stan_fit4lm_mod();
 RcppExport SEXP _rcpp_module_boot_stan_fit4model_1_b_mod();
 RcppExport SEXP _rcpp_module_boot_stan_fit4model_2_br_mod();
-RcppExport SEXP _rcpp_module_boot_stan_fit4model_3_br_mod();
-RcppExport SEXP _rcpp_module_boot_stan_fit4model_4_bre_mod();
-RcppExport SEXP _rcpp_module_boot_stan_fit4model_5_bremn_mod();
-RcppExport SEXP _rcpp_module_boot_stan_fit4model_6_bremn_var_mod();
-RcppExport SEXP _rcpp_module_boot_stan_fit4model_6_bremn_var_mle_mod();
+RcppExport SEXP _rcpp_module_boot_stan_fit4model_3_bre_mod();
+RcppExport SEXP _rcpp_module_boot_stan_fit4model_4_bremn_mod();
+RcppExport SEXP _rcpp_module_boot_stan_fit4model_5_bremn_var_mod();
+RcppExport SEXP _rcpp_module_boot_stan_fit4model_5_bremn_var_mle_mod();
 
 static const R_CallMethodDef CallEntries[] = {
     {"_rcpp_module_boot_stan_fit4lm_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4lm_mod, 0},
     {"_rcpp_module_boot_stan_fit4model_1_b_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4model_1_b_mod, 0},
     {"_rcpp_module_boot_stan_fit4model_2_br_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4model_2_br_mod, 0},
-    {"_rcpp_module_boot_stan_fit4model_3_br_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4model_3_br_mod, 0},
-    {"_rcpp_module_boot_stan_fit4model_4_bre_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4model_4_bre_mod, 0},
-    {"_rcpp_module_boot_stan_fit4model_5_bremn_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4model_5_bremn_mod, 0},
-    {"_rcpp_module_boot_stan_fit4model_6_bremn_var_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4model_6_bremn_var_mod, 0},
-    {"_rcpp_module_boot_stan_fit4model_6_bremn_var_mle_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4model_6_bremn_var_mle_mod, 0},
+    {"_rcpp_module_boot_stan_fit4model_3_bre_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4model_3_bre_mod, 0},
+    {"_rcpp_module_boot_stan_fit4model_4_bremn_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4model_4_bremn_mod, 0},
+    {"_rcpp_module_boot_stan_fit4model_5_bremn_var_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4model_5_bremn_var_mod, 0},
+    {"_rcpp_module_boot_stan_fit4model_5_bremn_var_mle_mod", (DL_FUNC) &_rcpp_module_boot_stan_fit4model_5_bremn_var_mle_mod, 0},
     {NULL, NULL, 0}
 };
 
