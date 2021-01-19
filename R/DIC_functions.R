@@ -72,7 +72,7 @@ integrate_log_lik <- function(stan_fit){
 calc_DIC_hierarchical <- function(stan_fit, stan_mle, run_data){
 
   run_data_mle <- add_mle_param(stan_fit, run_data)
-  MLE_fit <-stan(file = stan_mle, data = run_data_mle, iter = 200, chains = 3)
+  MLE_fit <-rstan::stan(file = stan_mle, data = run_data_mle, iter = 400, chains = 3)
 
   MCMC_LL_mean <- integrate_log_lik(stan_fit)
   MLE_LL <- integrate_log_lik(MLE_fit)

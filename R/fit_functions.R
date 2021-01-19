@@ -9,9 +9,9 @@
 #' @export
 get_models <- function(model_numbers){
 
-  models <- vector("list", length(model_numbers))
+  models <- c()
 
-  model_names <- c("1_b", "2_br", "3_bre", "4_bremn", "5_bremn_var")
+  model_names <- c("1_b", "2_b_multi", "3_br", "4_bre", "5_bremn", "6_bremn_var")
 
   i <- 0
   for(m in model_numbers){
@@ -42,17 +42,17 @@ fit_models <- function(models, stan_data, iter=300, chains=3){
   i <- 0
   for (m in models){
     i <- i+1
-    fits[m] <- rstan::stan(file = m, data = stan_data, iter = iter, chains = chains)
+    fits[[i]] <- rstan::stan(file = m, data = stan_data, iter = iter, chains = chains)
 
     if(substring(m, nchar(m)-7) == 'var.stan'){
 
       model_mle <- paste0(substring(m, 1 ,nchar(m)-5),
                           "_mle.stan")
 
-      DICs[m] <- BayesianPain::calc_DIC_hierarchical(fits[[m]], model_mle, stan_data)
+      DICs[i] <- BayesianPain::calc_DIC_hierarchical(fits[[i]], model_mle, stan_data)
     } else{
 
-      DICs[m] <- BayesianPain::calc_DIC(fits[[m]])
+      DICs[i] <- BayesianPain::calc_DIC(fits[[i]])
     }
   }
 
