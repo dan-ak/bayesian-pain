@@ -34,7 +34,7 @@ get_models <- function(model_numbers){
 #' @return an array of stan model objects corresponding to select models
 #'
 #'@export
-fit_models <- function(models, stan_data, iter=300, chains=3){
+fit_models <- function(models, stan_data, iter=300, chains=3, adapt_delta=0.95, max_treedepth=10){
 
   fits <- vector("list", length(models))
   DICs <- vector("list", length(models))
@@ -42,7 +42,7 @@ fit_models <- function(models, stan_data, iter=300, chains=3){
   i <- 0
   for (m in models){
     i <- i+1
-    fits[[i]] <- rstan::stan(file = m, data = stan_data, iter = iter, chains = chains)
+    fits[[i]] <- rstan::stan(file = m, data = stan_data, iter = iter, chains = chains, control= list(adapt_delta=adapt_delta, max_treedepth=max_treedepth)))
 
     if(substring(m, nchar(m)-7) == 'var.stan'){
 
