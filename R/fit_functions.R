@@ -42,7 +42,7 @@ fit_models <- function(models, stan_data, iter=300, chains=3, adapt_delta=0.95, 
   i <- 0
   for (m in models){
     i <- i+1
-    fits[[i]] <- rstan::stan(file = m, data = stan_data, iter = iter, chains = chains, control= list(adapt_delta=adapt_delta, max_treedepth=max_treedepth)))
+    fits[[i]] <- rstan::stan(file = m, data = stan_data, iter = iter, chains = chains, control= list(adapt_delta=adapt_delta, max_treedepth=max_treedepth))
 
     if(substring(m, nchar(m)-7) == 'var.stan'){
 
